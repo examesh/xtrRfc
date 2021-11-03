@@ -1,9 +1,7 @@
-# xtrRfc
-
 xtrRfc.sh exracts all RFCs (incl. URLs and abstracts) from a given text.
 
 
-### Features
+## Features
 
 - Tries hard to detect all RFC terms (like RFC 1 or RFC-1 or rfc 1) in a given text.
 - Consolidates found RFCs: RFC 1, RFC 001 and RFC 0001 will be converted to RFC 0001.
@@ -13,7 +11,7 @@ xtrRfc.sh exracts all RFCs (incl. URLs and abstracts) from a given text.
 
 
 
-### Usage
+## Usage
 
 ```bash
 
@@ -46,7 +44,7 @@ man date | ./xtrRfc.sh --txt=- --rfc=/tmp/rfc.txt
 ```
 
 
-### Example
+## Example
 
 ```bash
 $ man date | ./xtrRfc.sh --txt=STDIN
