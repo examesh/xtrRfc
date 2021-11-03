@@ -21,7 +21,7 @@ $ ./xtrRfc.sh
 
 Extract all RFCs from a given text:
 
-/home/pi/kit/sh/app/xtrRfc/xtrRfc.sh --txt=... [--rfc=...]
+./xtrRfc.sh --txt=... [--rfc=...]
 
 --txt=<file>   # extract all RFCs from <file>
 --txt=STDIN    # extract all RFCs from STDIN
@@ -34,15 +34,15 @@ Examples:
 
 # read text from /tmp/foo.txt
 # read rfc abstracts from https://www.ietf.org/download/rfc-index.txt
-/home/pi/kit/sh/app/xtrRfc/xtrRfc.sh --txt=/tmp/foo.txt
+./xtrRfc.sh --txt=/tmp/foo.txt
 
 # read text from STDIN
 # read rfc abstracts from https://www.ietf.org/download/rfc-index.txt
-man date | /home/pi/kit/sh/app/xtrRfc/xtrRfc.sh --txt=STDIN
+man date | ./xtrRfc.sh --txt=STDIN
 
 # read text from STDIN
 # read rfc abstracts from /tmp/rfc.txt
-man date | /home/pi/kit/sh/app/xtrRfc/xtrRfc.sh --txt=- --rfc=/tmp/rfc.txt
+man date | ./xtrRfc.sh --txt=- --rfc=/tmp/rfc.txt
 ```
 
 
