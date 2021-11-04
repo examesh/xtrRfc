@@ -10,7 +10,8 @@ MY_ARGS="${*}"
 MY_FP=$(readlink -f "${0}")
 MY_FN=${MY_FP##*/}
 MY_DP=${MY_FP%/*}
-RFC_LIST_URL="https://www.ietf.org/download/rfc-index.txt"
+RFC_LIST_URL1="https://www.ietf.org/download/rfc-index.txtt"
+RFC_LIST_URL2="https://raw.githubusercontent.com/examesh/xtrRfc/main/data/rfc-index-20211104.txt"
 RFC_URL="https://datatracker.ietf.org/doc/html"
 RFC_START_PAT="0001 Host Software. S. Crocker"
 DLOAD_TIMEOUT_SEC=6
@@ -72,16 +73,16 @@ ${MY_FP} --txt=... [--rfc=...]
 --txt=-        # extract all RFCs from STDIN
 
 --rfc=<file>   # get RFC abstracts from <file>
-               # instead of ${RFC_LIST_URL}
+               # instead of ${RFC_LIST_URL1}
 
 Examples:
 
 # read text from /tmp/foo.txt
-# read rfc abstracts from ${RFC_LIST_URL}
+# read rfc abstracts from ${RFC_LIST_URL1}
 ${MY_FP} --txt=/tmp/foo.txt
 
 # read text from STDIN
-# read rfc abstracts from ${RFC_LIST_URL}
+# read rfc abstracts from ${RFC_LIST_URL1}
 man date | ${MY_FP} --txt=STDIN
 
 # read text from STDIN
@@ -128,7 +129,9 @@ extractRfcs() {
 }
 
 checkRfcList() {
-  echo "${*}" | grep -F "${RFC_START_PAT}" >/dev/null
+  ! echo "${*}" | grep -F "${RFC_START_PAT}" >/dev/null || return 0
+  stderr "RFC list has not expected patterns"
+  return 1
 }
 
 convertRfcList() {
@@ -188,10 +191,10 @@ main() {
   else
     isc curl || isc wget || \
       die "Neither curl nor wget found: Cannot download RFC list"
-    local rfcList=$(dload ${RFC_LIST_URL})
+    local rfcList=$(dload ${RFC_LIST_URL1})
+    checkRfcList "${rfcList}" || rfcList=$(dload ${RFC_LIST_URL2})
     checkRfcList "${rfcList}" || \
-      die "Parsing RFC list from ${RFC_LIST_URL} failed:" \
-          "Download failed or has unexpected content"
+      die "Parsing RFC list failed: Download failed or has unexpected content"
   fi
   rfcList=$(convertRfcList "${rfcList}")
   printRfcs "${rfcList}" "${rfcs}"
