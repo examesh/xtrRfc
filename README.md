@@ -1,4 +1,16 @@
-xtrRfc.sh exracts all RFCs (incl. URLs and abstracts) from a given text.
+xtrRfc.sh exracts all RFCs incl. URLs and abstracts from a given text.
+
+
+## Abstract
+
+The standardization of algorithms and processes is an elementary component of the IT
+world. Although of greater importance as a source of information for the researcher,
+the standards are also of interest to developers and system engineers for answering
+detailed questions. In particular, during research, you will often find references
+to the IETF _Request for Comments_. Memos in the RFC document series contain technical
+and organizational notes about the Internet and Internet services. They cover many
+aspects of computer networking, including protocols, procedures, programs, and concepts.
+
 
 
 ## Features
